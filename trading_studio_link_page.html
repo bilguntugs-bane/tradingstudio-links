@@ -1,0 +1,286 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+  .ts-wrap {
+    min-height: 100vh;
+    background: #0a0a0f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 40px;
+    font-family: 'Rajdhani', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ts-wrap::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(180,0,255,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ts-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #b400ff44, transparent);
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(180,0,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(180,0,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .avatar-ring {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    border: 2px solid #b400ff;
+    padding: 3px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 18px rgba(180,0,255,0.4);
+  }
+
+  .avatar-inner {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a001a, #2a0040);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    color: #b400ff;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .ts-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f0e0ff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 2px;
+    position: relative; z-index: 1;
+  }
+
+  .ts-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #b400ff;
+    letter-spacing: 2px;
+    margin: 0 0 6px;
+    position: relative; z-index: 1;
+  }
+
+  .ts-bio {
+    font-size: 13px;
+    color: #9988aa;
+    text-align: center;
+    max-width: 280px;
+    line-height: 1.5;
+    margin: 0 0 28px;
+    position: relative; z-index: 1;
+    letter-spacing: 0.3px;
+  }
+
+  .divider {
+    width: 100%;
+    max-width: 320px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #b400ff55, transparent);
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #3a0055;
+    background: rgba(180, 0, 255, 0.06);
+    text-decoration: none;
+    color: #f0e0ff;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative; z-index: 1;
+    box-sizing: border-box;
+  }
+
+  .link-btn:hover {
+    border-color: #b400ff;
+    background: rgba(180, 0, 255, 0.14);
+  }
+
+  .link-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .ic-discord { background: rgba(88,101,242,0.2); border: 1px solid rgba(88,101,242,0.4); }
+  .ic-threads { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); }
+  .ic-facebook { background: rgba(24,119,242,0.2); border: 1px solid rgba(24,119,242,0.4); }
+
+  .link-text {
+    flex: 1;
+  }
+
+  .link-label {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #f0e0ff;
+    display: block;
+  }
+
+  .link-sub {
+    font-size: 11px;
+    color: #7755aa;
+    letter-spacing: 0.5px;
+    font-family: 'Space Mono', monospace;
+    display: block;
+    margin-top: 1px;
+  }
+
+  .arrow {
+    font-size: 14px;
+    color: #b400ff;
+    opacity: 0.7;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .dm-box {
+    width: 100%;
+    max-width: 320px;
+    border: 1px dashed #4a0066;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    position: relative; z-index: 1;
+    box-sizing: border-box;
+  }
+
+  .dm-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #b400ff;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .dm-text {
+    font-size: 13px;
+    color: #c8b8dd;
+    line-height: 1.5;
+  }
+
+  .dm-text span {
+    font-family: 'Space Mono', monospace;
+    color: #b400ff;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .footer {
+    margin-top: 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: #4a3a5a;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00ff88;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+    vertical-align: middle;
+    position: relative; top: -1px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>
+
+<div class="ts-wrap">
+  <div class="grid-bg"></div>
+
+  <div class="avatar-ring">
+    <div class="avatar-inner">ANA</div>
+  </div>
+
+  <p class="ts-name">Trading Studio</p>
+  <p class="ts-tag">// FOREX MENTOR · XAUUSD · SMC</p>
+  <p class="ts-bio">Монгол трейдерүүдэд зориулсан системтэй trading арга зүй. Data-driven. Emotion-free.</p>
+
+  <div class="divider"></div>
+
+  <a class="link-btn" href="https://discord.gg/88pxNqUH6p" target="_blank">
+    <div class="link-icon ic-discord">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#5865F2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+    </div>
+    <div class="link-text">
+      <span class="link-label">Discord</span>
+      <span class="link-sub">Community · Analysis · Q&A</span>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="link-btn" href="https://www.threads.com/@tradingstudio24" target="_blank">
+    <div class="link-icon ic-threads">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#f0e0ff"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.068c0-3.52.85-6.372 2.495-8.423C5.845 1.205 8.598.024 12.179 0h.014c2.1.016 3.987.609 5.61 1.761.867.612 1.626 1.37 2.258 2.254l-1.786 1.214c-.488-.656-1.062-1.22-1.709-1.679-1.244-.878-2.743-1.345-4.366-1.357-2.97.02-5.234.93-6.726 2.703C4.027 6.466 3.32 8.9 3.32 12.068c0 3.17.707 5.602 2.155 7.23 1.492 1.773 3.756 2.683 6.726 2.703 1.93-.013 3.6-.459 5.07-1.362 1.667-1.017 2.707-2.497 3.135-4.44h-6.33v-2.12h8.61c.116.752.175 1.52.175 2.303 0 2.964-.854 5.295-2.538 6.93-1.632 1.586-3.876 2.388-6.677 2.388l.54.2z"/></svg>
+    </div>
+    <div class="link-text">
+      <span class="link-label">Threads</span>
+      <span class="link-sub">Daily insights · Market takes</span>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="link-btn" href="https://www.facebook.com/profile.php?id=61568022624196" target="_blank">
+    <div class="link-icon ic-facebook">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </div>
+    <div class="link-text">
+      <span class="link-label">Facebook</span>
+      <span class="link-sub">Carousels · Education · News</span>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <div class="dm-box">
+    <span class="dm-label">// Free resource</span>
+    <p class="dm-text">Instagram DM-д <span>JOURNAL</span> гэж бич → Free Trading Journal Template авна</p>
+  </div>
+
+  <p class="footer"><span class="status-dot"></span>TRADING STUDIO · EST. 2024</p>
+</div>
